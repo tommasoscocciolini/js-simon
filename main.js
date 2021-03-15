@@ -12,11 +12,17 @@ $(document).ready(function () {
   console.log(numeriRandom);
   $("#numeri").text(numeriRandom) //stampo numeri
 
-  var count = 0;
+  setTimeout(function () { //ritardo apparizione cerchio orologio
+    $('#count').parent().css("display", "flex");
+  },1000);
+
+  var count = 1; //creo contatore secondi
   var id = setInterval(function () {
     $('#count').text(count);
-    clearInterval(id);
-    count++
+    count++;
+    if (count==31) {
+      count=0;
+    }
   },1000);
 
   //timer 30sec di num visibili
@@ -29,6 +35,7 @@ $(document).ready(function () {
   // timer 30sec senza numeri +
   // inserisco numeri che ricordo
   setTimeout(function () {
+    $("#message").text(" ");
     for (var i = 0; i < 5; i++) {
       numerimemorizzati[i] = parseInt(prompt("Inserisci i numeri che ricordi: "))
     }
@@ -37,6 +44,7 @@ $(document).ready(function () {
     console.log(resultArray);
     $("#myNums").text("Numeri Validi: " +resultArray+" Punteggio: "+ resultArray.length +"/5")
     $("#message").text("RISULTATO");
+    $('#count').parent().hide()
   }, 60000)
 });
 
